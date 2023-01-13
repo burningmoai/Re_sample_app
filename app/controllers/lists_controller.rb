@@ -4,10 +4,13 @@ class ListsController < ApplicationController
   end
 
   def create
-    list = List.new(list_params)
-    list.save
+    @list = List.new(list_params)
+    if @list.save
     # redirect_to '/top' #パスじゃなくてURLを指定してもイイね
-    redirect_to list_path(list.id) #ルーティング変更後
+      redirect_to list_path(list.id) #ルーティング変更後
+    else
+      render :new
+    end
 
   end
 
