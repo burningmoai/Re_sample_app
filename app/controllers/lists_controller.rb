@@ -7,8 +7,11 @@ class ListsController < ApplicationController
     @list = List.new(list_params)
     if @list.save
     # redirect_to '/top' #パスじゃなくてURLを指定してもイイね
-      redirect_to list_path(list.id) #ルーティング変更後
+      flash[:notice] = "投稿が成功しました"
+      redirect_to list_path(@list.id) #ルーティング変更後
     else
+      # @lists = List.all #indexで使っているインスタンス変数を用意する
+      # render :index
       render :new
     end
 
